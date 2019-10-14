@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--  -->
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in emps" v-bind:key="index">No.{{index+1}} name:{{item.name}},salary:{{item.salary}}</li>
+        </ul>
+
+        <h2>迭代对象</h2>
+        <ul>
+            <li v-for="(value,key,index) in person">
+                No.{{index + 1 }} {{key}} is {{value}}
+            </li>
+        </ul>
+    </div>
+
+    
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                emps:[
+                    {name:'huaming',salary:20000},
+                    {name:'wanqiang',salary:13000},
+                    {name:'moqi',salary:17000}
+                ],
+                person:{
+                    name:'dream',
+                    age:18
+                }
+            }
+        })
+    </script>
+</body>
+</html>

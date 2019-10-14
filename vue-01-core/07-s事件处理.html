@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>事件处理</h3>
+        <button v-on:click="say">Say {{msg}}</button><br />
+        <!-- $event代表原生dom事件 -->
+        <button @click="warm(msg,$event)">Warm</button>
+
+
+        <h2>事件修饰符</h2>
+
+        <div @click="todo">
+            <button @click="doThis">单击事件继续传播</button>
+        </div>
+
+        <div @click="todo">
+            <button @click.stop="doThis">阻止单击事件继续传播</button>
+        </div>
+
+        <a href="http://wwww.baidu.com" @click.prevent="doStop">百度一下</a>
+        <button @click.once="doOnece">执行一次</button>
+
+        <div v-upper-text="msg">
+            {{msg}}
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        Vue.directive('upper-text',{
+            inserted:function(el,binding){
+                el.innerHTML = binding.value.toUpperCase();
+            }
+        });
+
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'good idea'
+            },
+            methods:{
+                say:function(event){
+                    //event dom原生事件
+
+                    alert(this.msg);
+                    alert(event.target.innerHTML);
+                },
+                warm:function(name,event){
+                    alert(name + " " + event.target.tagName);
+                },
+                doThis:function(){
+                    alert('doTHis');
+                },
+                todo:function(){
+                    alert('todo.....');
+                },
+                doStop:function(){
+                    alert('阻止默认');
+                },
+                doOnece:function(){
+                    alert('执行一次');
+                }
+            }
+        })
+    </script>
+</body>
+</html>
